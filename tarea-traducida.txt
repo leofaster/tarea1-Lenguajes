@@ -1,0 +1,74 @@
+Parte 1
+
+  :                           Repite el ultimo comando 
+  :browse[!] [[*]<mod>]       Muestra los nombres definidos en el modulo <mod>
+                              (!: mas detalles; *: todos los nombres top-level )
+							  
+  :info [<name> ...]          Muestra informacion acerca de los nombres 
+  :module [+/-] [*]<mod> ...  Coloca el contexto para evaluar una expresion 
+  :load [*]<module> ...       Carga un modulo y sus dependencias
+  :reload                     Recarga el modulo actual 
+  :type <expr>                Muestra el tipo de la <expr>
+  
+  
+  
+Parte 2
+  curry :: ((a, b) -> c) -> a -> b -> c   -- Defined in `Data.Tuple'
+	
+	Convierte una funcion que toma multiples argumentos en una funcion que solo toma un argumento y devuelve otra funcion en caso de que alguno 
+	de los argumentos lo necesite
+		f :: a -> b -> c
+			Es la forma currificada de 
+		g :: (a, b) -> c
+  
+	Ambas formas son igual de expresivas, pero la forma currificada usualmente es mas conveniente porque permite una aplicacion parcial
+		Una aplicacion parcialen haskell involucra pasar una numero de argumentos menos a una funcionq una funcion que requiere muchos argumentos
+
+		Por Ejemplo:
+			add     :: Int -> Int -> Int
+			add x y = x + y
+			addOne = add 1
+
+			En el ejemplo, addOne es el resultado de aplicar parcialmente add.
+			Es una nueva funcion que toma un integer le suma 1 y lo devuelve como resultado
+			
+  
+  
+  uncurry :: (a -> b -> c) -> (a, b) -> c         -- Defined in `Data.Tuple'
+  
+  Convierte una funcion currificadaa una funcion pareja
+  
+  flip :: (a -> b -> c) -> b -> a -> c    -- Defined in `GHC.Base'
+	Invierte los primeros dos argumentos de una funcion
+  
+  null :: [a] -> Bool     -- Defined in `GHC.List'
+	Busca en una lista y verifica si esta vacia. Retorna Truesi lo esta, y falso si no lo esta.
+  
+  (!!) :: [a] -> Int -> a         -- Defined in `GHC.List'
+	Retorna el elemento de la lista que se encuentra en la posicion dada.
+  
+  take :: Int -> [a] -> [a]       -- Defined in `GHC.List'
+	Toma n primeros elementos de una lista,o la lista completa en caso de ser mayor el numero al largo de la lista
+		Por Ejemplo:
+			take 2 [3,4,7] = [3,4]
+
+  drop :: Int -> [a] -> [a]       -- Defined in `GHC.List'
+	Toma n primeros elementos de una lista y los elimina, en caso de ser mayor el numero al largo de la lista devuelve la lista vacia
+		Por Ejemplo:
+			drop 3 [1,2,3,4] = [4]
+
+  
+  elem :: Eq a => a -> [a] -> Bool        -- Defined in `GHC.List'
+	Busca dentro de una lista a ver si el elemento pasado como argumento esta en la lista
+		Por Ejemplo:
+			elem 4 [1,2,3] = False
+
+  
+  class Fractional a => Floating a 
+	where
+		sqrt :: a -> a    -- Defined in `GHC.Float'
+		
+		Devuelve la raiz cuadrada del numero
+		
+		Por Ejemplo:
+			sqrt 25 = 5.0
